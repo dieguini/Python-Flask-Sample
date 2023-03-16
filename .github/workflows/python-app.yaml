@@ -44,7 +44,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      DOCKER_IMAGE_ENVIRONMENT: ${{ github.base_ref }}
+      DOCKER_ENVIRONMENT: ${{ github.base_ref }}
     # needs: tests
     permissions:
       contents: read
@@ -70,7 +70,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            ${{ DOCKER_IMAGE_ENVIRONMENT }}
+            type=ref,event=pr
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
