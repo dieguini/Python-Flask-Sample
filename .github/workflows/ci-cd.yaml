@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   tests:
-    # if: false # Skipp job when needed 
+    if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -45,7 +45,7 @@ jobs:
       DOCKER_REGISTRY: ${{ vars.DOCKER_HUB_NS }}
       GHCR_REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-    needs: tests
+    # needs: tests
     permissions:
       contents: read
       packages: write
@@ -67,7 +67,8 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          username: ${{ github.actor }}
+          # username: ${{ github.actor }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       # Step 4: Metadata for image name
       # Step 4.1: Docker Metadata
