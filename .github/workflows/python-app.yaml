@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   tests:
-    if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
