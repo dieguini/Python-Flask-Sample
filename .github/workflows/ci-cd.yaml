@@ -39,7 +39,7 @@ jobs:
       run: |
         python -m pytest -v --cov=.
 
-  build-and-push-image:
+  build:
     runs-on: ubuntu-latest
     env:
       DOCKER_REGISTRY: ${{ vars.DOCKER_HUB_NS }}
