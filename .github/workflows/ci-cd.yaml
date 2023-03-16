@@ -48,8 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_REGISTRY: ${{ vars.DOCKER_HUB_NS }}
+      DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
       GHCR_REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      GHCR_IMAGE_NAME: ${{ github.repository }}
     # needs: tests
     permissions:
       packages: write
@@ -87,8 +88,9 @@ jobs:
         id: meta-docker
         uses: docker/metadata-action@v4
         with:
-          # images: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}
-          images: g0l14t/python-flask-sample
+          # images: ${{ env.DOCKER_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}
+          # images: g0l14t/python-flask-sample
+          images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
             type=raw,value={{ base_ref }}
@@ -98,7 +100,7 @@ jobs:
         id: meta-ghcr
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
             type=raw,value={{ base_ref }}
