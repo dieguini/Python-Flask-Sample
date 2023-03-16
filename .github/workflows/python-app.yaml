@@ -4,17 +4,14 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev", "qa" ]
 
 permissions:
   contents: read
 
-env:
-  REGISTRY: ghcr.io                     # For build stage
-  IMAGE_NAME: ${{ github.repository }}  # For build stage
-
 jobs:
   tests:
+    if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -44,7 +41,11 @@ jobs:
 
   build-and-push-image:
     runs-on: ubuntu-latest
-    needs: tests
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
+      DOCKER_IMAGE_ENVIRONMENT: ${{ github.ref_name }}
+    # needs: tests
     permissions:
       contents: read
       packages: write
@@ -69,11 +70,14 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       # Step 5: Build and push
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
+      - name: Test environment
+        run: |
+          echo "Ambiente ${{ DOCKER_IMAGE_ENVIRONMENT }}"
 
