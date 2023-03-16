@@ -70,7 +70,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=pr
+            type=ref,enable=true,priority=600,prefix=pr-,suffix=,event=pr
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
