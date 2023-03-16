@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   tests:
-    if: false # Skipp job when needed 
+    # if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -44,8 +44,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      DOCKER_ENVIRONMENT: ${{ github.base_ref }}
-    # needs: tests
+    needs: tests
     permissions:
       contents: read
       packages: write
@@ -71,7 +70,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
-            type=raw,value={{base_ref}}-{{sha}}
+            type=raw,value={{ base_ref }}
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
