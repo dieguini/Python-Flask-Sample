@@ -52,8 +52,8 @@ jobs:
       IMAGE_NAME: ${{ github.repository }}
     # needs: tests
     permissions:
-      contents: read
       packages: write
+      contents: read
     steps:
       # Step 1: obtain repo from GitHub
       - 
@@ -109,8 +109,8 @@ jobs:
         with:
           context: .
           push: true
-          # tags: ${{ steps.meta.outputs.tags }}
-          # labels: ${{ steps.meta.outputs.labels }}
-          tags: |
-            ${{ steps.meta-docker.outputs.tags }}
-            ${{ steps.meta-ghcr.outputs.tags }}
+          tags: ${{ steps.meta-docker.outputs.tags }}
+          labels: ${{ steps.meta-docker.outputs.labels }}
+          # tags: |
+          #   ${{ steps.meta-docker.outputs.tags }}
+          #   ${{ steps.meta-ghcr.outputs.tags }}
