@@ -71,7 +71,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
-            type=raw,value=mytag-{{branch}}-{{sha}}
+            type=raw,value={{base_ref}}-{{sha}}
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
