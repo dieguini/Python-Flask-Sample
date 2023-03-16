@@ -44,7 +44,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      DOCKER_IMAGE_ENVIRONMENT: ${{ github.head_ref }}
+      DOCKER_IMAGE_ENVIRONMENT: ${{ github.base_ref }}
     # needs: tests
     permissions:
       contents: read
