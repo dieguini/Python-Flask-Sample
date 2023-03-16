@@ -4,17 +4,14 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev", "qa" ]
 
 permissions:
   contents: read
 
-env:
-  REGISTRY: ghcr.io                     # For build stage
-  IMAGE_NAME: ${{ github.repository }}  # For build stage
-
 jobs:
   tests:
+    # if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -44,6 +41,9 @@ jobs:
 
   build-and-push-image:
     runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
     needs: tests
     permissions:
       contents: read
@@ -63,11 +63,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       # Step 4: Metadata for image name
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Docker metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            # dynamically set the branch name and sha as a custom tag
+            type=raw,value={{ base_ref }}
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
