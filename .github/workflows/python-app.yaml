@@ -64,11 +64,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       # Step 4: Metadata for image name
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Docker metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$DOCKER_IMAGE_ENVIRONMENT
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            $DOCKER_IMAGE_ENVIRONMENT
       # Step 5: Build and push
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
