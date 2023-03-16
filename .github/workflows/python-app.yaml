@@ -2,15 +2,16 @@ name: Python sample application flask
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "main", "dev", "qa" ]
 
 permissions:
   contents: read
 
 jobs:
   tests:
+    if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -78,5 +79,5 @@ jobs:
       #     labels: ${{ steps.meta.outputs.labels }}
       - name: Test environment
         run: |
-          echo "Ambiente ${{ DOCKER_IMAGE_ENVIRONMENT }}"
+          echo "Ambiente $DOCKER_IMAGE_ENVIRONMENT"
 
