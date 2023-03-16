@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   tests:
-    if: false # Skipp job when needed 
+    # if: false # Skipp job when needed 
     runs-on: ubuntu-latest
     steps:
     # Step 1: obtain repo from GitHub
@@ -51,7 +51,7 @@ jobs:
       DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
       GHCR_REGISTRY: ghcr.io
       GHCR_IMAGE_NAME: ${{ github.repository }}
-    # needs: tests
+    needs: tests
     permissions:
       packages: write
       contents: read
