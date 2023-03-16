@@ -111,8 +111,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta-docker.outputs.tags }}
-          labels: ${{ steps.meta-docker.outputs.labels }}
-          # tags: |
-          #   ${{ steps.meta-docker.outputs.tags }}
-          #   ${{ steps.meta-ghcr.outputs.tags }}
+          # tags: ${{ steps.meta-docker.outputs.tags }}
+          # labels: ${{ steps.meta-docker.outputs.labels }}
+          tags: |
+            ${{ steps.meta-docker.outputs.tags }}
+            ${{ steps.meta-ghcr.outputs.tags }}
