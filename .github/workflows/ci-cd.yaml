@@ -82,25 +82,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       # Step 4: Metadata for image name
-      # Step 4.1: Docker Metadata
       - 
         name: Docker metadata (tags, labels)
-        id: meta-docker
+        id: meta
         uses: docker/metadata-action@v4
         with:
-          # images: ${{ env.DOCKER_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}
-          # images: g0l14t/python-flask-sample
-          images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}
-          tags: |
-            # dynamically set the branch name and sha as a custom tag
-            type=raw,value={{ base_ref }}
-      # Step 4.2: GHCR Metadata
-      - 
-        name: Docker metadata (tags, labels)
-        id: meta-ghcr
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}
+          images: |
+            ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}
+            ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
             type=raw,value={{ base_ref }}
@@ -111,8 +100,5 @@ jobs:
         with:
           context: .
           push: true
-          # tags: ${{ steps.meta-docker.outputs.tags }}
-          # labels: ${{ steps.meta-docker.outputs.labels }}
           tags: |
-            ${{ steps.meta-docker.outputs.tags }}
-            ${{ steps.meta-ghcr.outputs.tags }}
+            ${{ steps.meta.outputs.tags }}
