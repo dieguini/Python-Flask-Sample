@@ -87,7 +87,8 @@ jobs:
         id: meta-docker
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}
+          # images: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME }}
           tags: |
             # dynamically set the branch name and sha as a custom tag
             type=raw,value={{ base_ref }}
