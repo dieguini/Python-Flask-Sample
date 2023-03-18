@@ -1,0 +1,7 @@
+flake8==6.0.0
+Flask==2.2.3
+pytest==7.2.2
+pytest-cov==4.0.0
+pip-tools==6.12.3
+mock==5.0.1
+autopep8==2.0.2
