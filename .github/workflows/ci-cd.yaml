@@ -4,7 +4,8 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main", "dev", "qa", "devops" ]
+    # fail-env = Failed "on porpuse" environment
+    branches: [ "main", "dev", "qa", "devops", "fail-env" ]
 
 permissions:
   contents: read
