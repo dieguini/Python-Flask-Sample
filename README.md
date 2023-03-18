@@ -6,7 +6,7 @@ Easy python flask example with Docker
 
 ### Virtual Environment (Windows)
 
-1. Activate environemnt on [myenv](myvenv/) folder
+1. Activate environment on [myenv](myvenv/) folder
 
 ```PS
 PS > .\myvenv\Scripts\activate
