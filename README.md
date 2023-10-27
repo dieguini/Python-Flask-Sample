@@ -36,3 +36,15 @@ Select
 ```PS
 (myvenv) PS > python -m pip install -r .\requirements.txt
 ```
+
+5. (Optional) Run flask application
+
+```PS
+(myvenv) PS > python -m flask --app .\flaskr\app.py run
+```
+
+6. (Optional) Run tests of application
+
+```PS
+(myvenv) PS > python -m pytest
+```
