@@ -25,25 +25,31 @@ Select
   
 > [myvenv/Scripts/python.exe](myvenv/Scripts/python.exe)
 
-3. Upgrade pip
+3. Ensure Pip
+
+```PS
+py -m ensurepip --upgrade
+```
+
+4. Upgrade pip
 
 ```PS
 (myvenv) PS > python -m pip install --upgrade pip
 ```
 
-4. Install Flask, already on the [requirements.txt](requirements.txt) file
+5. Install Flask, already on the [requirements.txt](requirements.txt) file
 
 ```PS
 (myvenv) PS > python -m pip install -r .\requirements.txt
 ```
 
-5. (Optional) Run flask application
+6. (Optional) Run flask application
 
 ```PS
 (myvenv) PS > python -m flask --app .\flaskr\app.py run
 ```
 
-6. (Optional) Run tests of application
+7. (Optional) Run tests of application
 
 ```PS
 (myvenv) PS > python -m pytest
