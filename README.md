@@ -1,6 +1,6 @@
 # Python-Flask-Sample
 
-Easy python flask example with Docker
+Easy python flask example with Docker.
 
 ## Usage
 
